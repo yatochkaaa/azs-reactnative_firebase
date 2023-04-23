@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Intro.otf",
+      "sha1": "a99d1283a72e1760e87b4ebeb30f651912cc3f6e"
+    },
+    {
+      "path": "src/assets/fonts/MusticaPro-SemiBold.otf",
+      "sha1": "e7b5d5025e1bb9912a21f91aed1f4c60449bdd34"
+    }
+  ]
+}
