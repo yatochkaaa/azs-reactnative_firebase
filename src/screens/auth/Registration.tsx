@@ -5,20 +5,26 @@ import {
   StyleSheet,
   Image,
   ImageBackground,
-  Pressable,
   TextInput,
+  TouchableOpacity,
 } from 'react-native';
-import {GSTYLES, IMGS} from '../../constants';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {GSTYLES, IMGS, ROUTES} from '../../constants';
 import PhoneNumberInput from '../../components/PhoneNumberInput';
+import {AuthStackParamList} from '../../navigations/AuthNavigator';
 
-const Registration = (): JSX.Element => {
+type Props = NativeStackScreenProps<AuthStackParamList, ROUTES.REGISTRATION>;
+
+const Registration = ({navigation}: Props): JSX.Element => {
   const [phoneInputText, setPhoneInputText] = React.useState<string>('');
   const [vereficationCode, setVereficationCode] = React.useState<string>('');
 
   return (
     <ImageBackground style={styles.background} source={IMGS.bg}>
       <View style={styles.container}>
-        <Image source={IMGS.arrow} />
+        <TouchableOpacity onPress={() => navigation.navigate(ROUTES.DRAWER)}>
+          <Image source={IMGS.arrow} />
+        </TouchableOpacity>
         <View style={styles.content}>
           <Image style={styles.logo} source={IMGS.logo} />
           <Text style={styles.title}>Процес реєстраціЇ</Text>
@@ -47,9 +53,9 @@ const Registration = (): JSX.Element => {
             </Text>
           </View>
 
-          <Pressable style={styles.button}>
+          <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Далі</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>
@@ -73,7 +79,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'Intro',
     fontSize: 16,
-    color: GSTYLES.textBlack,
+    color: GSTYLES.colors.black,
     textTransform: 'uppercase',
     marginBottom: 38,
   },
@@ -89,7 +95,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   vereficationInput: {
-    backgroundColor: GSTYLES.white,
+    backgroundColor: GSTYLES.colors.white,
     borderRadius: 15,
     marginBottom: 28,
   },
@@ -98,7 +104,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '100%',
-    backgroundColor: GSTYLES.emerald,
+    backgroundColor: GSTYLES.colors.emerald,
     padding: 16,
     borderRadius: 15,
   },
@@ -106,7 +112,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Intro',
     fontSize: 16,
     textAlign: 'center',
-    color: GSTYLES.white,
+    color: GSTYLES.colors.white,
     textTransform: 'uppercase',
   },
 });

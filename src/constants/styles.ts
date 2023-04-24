@@ -1,15 +1,28 @@
-const textBlack = '#303030';
+const black = '#303030';
+const white = '#fff';
 const emerald = '#00b488';
 const MusticaPro = 'MusticaPro-SemiBold';
+const Intro = 'Intro';
 
 export default {
-  textBlack,
-  emerald,
-  lightgray: '#fcfffe',
-  white: '#fff',
+  colors: {
+    black,
+    emerald,
+    white,
+    lightgray: '#fcfffe',
+  },
+  fontFamily: {
+    MusticaPro,
+    Intro,
+  },
+  menuText: {
+    fontFamily: MusticaPro,
+    fontSize: 18,
+    color: white,
+  },
   smallText: {
     fontFamily: MusticaPro,
-    color: textBlack,
+    color: black,
     fontSize: 12,
   },
   shadowProps: {

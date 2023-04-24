@@ -1,13 +1,12 @@
-export default {
-  LOGIN: 'Login',
-  REGISTRATION: 'Registration',
+export enum ROUTES {
+  LOGIN = 'Login',
+  REGISTRATION = 'Registration',
+  DRAWER = 'Drawer',
 
-  HOME: 'Home',
-  HOME_TAB: 'Home Tab',
-  HOME_DRAWER: 'Home Drawer',
-
-  NOTIFICATIONS: 'Notifications',
-  NOTIFICATIONS_DRAWER: 'Notifications Drawer',
-
-  PROFILE: 'My Profile',
-};
+  MAIN_DRAWER = 'Головна',
+  PROFILE_DRAWER = 'Мій кабінет',
+  СOUPONS_DRAWER = 'Мої талони',
+  PRICES_DRAWER = 'Ціни',
+  DISCOUNTS_DRAWER = 'Акції',
+  MAP_DRAWER = 'Карта АЗК',
+}

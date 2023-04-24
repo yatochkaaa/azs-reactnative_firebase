@@ -36,6 +36,7 @@ const PhoneNumberInput: React.FC<Props> = ({
         onChangeText={setPhoneInputText}
         style={[styles.input]}
         mask={mask}
+        keyboardType="number-pad"
         autoFocus
       />
       {phoneInputText.length > 5 && (
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: GSTYLES.white,
+    backgroundColor: GSTYLES.colors.white,
     borderRadius: 15,
   },
   flag: {
@@ -61,10 +62,10 @@ const styles = StyleSheet.create({
     width: '75%',
     fontFamily: 'MusticaPro-SemiBold',
     fontSize: 14,
-    color: GSTYLES.textBlack,
+    color: GSTYLES.colors.black,
   },
   textContainer: {
-    backgroundColor: GSTYLES.white,
+    backgroundColor: GSTYLES.colors.white,
     paddingHorizontal: 0,
     paddingVertical: 0,
   },
