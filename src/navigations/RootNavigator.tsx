@@ -4,15 +4,15 @@ import {Login, Registration} from '../screens/index';
 import {ROUTES} from '../constants';
 import DrawerNavigator from './DrawerNavigator';
 
-export type AuthStackParamList = {
+export type RootStackParamList = {
   Drawer: undefined;
   Registration: undefined;
   Login: undefined;
 };
 
-const Stack = createNativeStackNavigator<AuthStackParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
-function AuthNavigator() {
+function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name={ROUTES.DRAWER} component={DrawerNavigator} />
@@ -22,4 +22,4 @@ function AuthNavigator() {
   );
 }
 
-export default AuthNavigator;
+export default RootNavigator;

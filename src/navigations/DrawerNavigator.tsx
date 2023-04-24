@@ -13,10 +13,12 @@ import {
   CustomDrawerContent,
   Profile,
   Main,
+  Notifications,
 } from '../screens';
 
 export type DrawerParamList = {
   [ROUTES.MAIN_DRAWER]: undefined;
+  [ROUTES.NOTIFICATIONS_DRAWER]: undefined;
   [ROUTES.PROFILE_DRAWER]: undefined;
   [ROUTES.СOUPONS_DRAWER]: undefined;
   [ROUTES.PRICES_DRAWER]: undefined;
@@ -48,6 +50,11 @@ const DrawerNavigator = (): JSX.Element => {
         options={{drawerItemStyle: {display: 'none'}}}
         name={ROUTES.MAIN_DRAWER}
         component={Main}
+      />
+      <Drawer.Screen
+        options={{drawerItemStyle: {display: 'none'}}}
+        name={ROUTES.NOTIFICATIONS_DRAWER}
+        component={Notifications}
       />
       <Drawer.Screen
         options={{

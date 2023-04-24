@@ -7,3 +7,4 @@ export {default as Map} from './drawer/Map';
 export {default as Discounts} from './drawer/Discounts';
 export {default as CustomDrawerContent} from './drawer/CustomDrawerContent';
 export {default as Profile} from './drawer/Profile';
+export {default as Notifications} from './drawer/Notifications';

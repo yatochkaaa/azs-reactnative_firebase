@@ -11,7 +11,7 @@ import {
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {GSTYLES, IMGS, ROUTES} from '../../constants';
 import PhoneNumberInput from '../../components/PhoneNumberInput';
-import {AuthStackParamList} from '../../navigations/AuthNavigator';
+import {AuthStackParamList} from '../../navigations/RootNavigator';
 
 type Props = NativeStackScreenProps<AuthStackParamList, ROUTES.REGISTRATION>;
 

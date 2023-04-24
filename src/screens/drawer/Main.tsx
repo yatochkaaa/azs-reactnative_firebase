@@ -7,8 +7,9 @@ import {
   Image,
 } from 'react-native';
 import {DrawerScreenProps} from '@react-navigation/drawer';
-import {GSTYLES, IMGS, ROUTES} from '../../constants';
+import {IMGS, ROUTES} from '../../constants';
 import {DrawerParamList} from '../../navigations/DrawerNavigator';
+import Carousel from '../../components/Carousel/Carousel';
 
 type Props = DrawerScreenProps<DrawerParamList, ROUTES.MAIN_DRAWER>;
 
@@ -19,7 +20,8 @@ const Main = ({navigation}: Props): JSX.Element => {
     <ImageBackground style={styles.background} source={IMGS.bg}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={openDrawer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(ROUTES.NOTIFICATIONS_DRAWER)}>
             <Image source={IMGS.notifications} />
           </TouchableOpacity>
           <Image source={IMGS.mainLogo} />
@@ -27,9 +29,7 @@ const Main = ({navigation}: Props): JSX.Element => {
             <Image source={IMGS.menu} />
           </TouchableOpacity>
         </View>
-        <View style={[GSTYLES.shadowProps, styles.carouselContainer]}>
-          <Image style={styles.carouselImage} source={IMGS.discount} />
-        </View>
+        <Carousel />
       </View>
     </ImageBackground>
   );
@@ -47,16 +47,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 24,
-  },
-  carouselContainer: {
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: GSTYLES.colors.white,
-    borderRadius: 16,
-  },
-  carouselImage: {
-    width: '100%',
-    borderRadius: 16,
   },
 });
 
