@@ -9,8 +9,6 @@ export default {
   ua: require('../assets/images/ua.png'),
   cross: require('../assets/images/cross.png'),
   edit: require('../assets/images/edit.png'),
-  menu: require('../assets/images/menu.png'),
-  notifications: require('../assets/images/notifications.png'),
   mainLogo: require('../assets/images/mainLogo.png'),
   menuProfile: require('../assets/images/menuProfile.png'),
   menuCoupons: require('../assets/images/menuCoupons.png'),

@@ -12,7 +12,7 @@ const {width} = Dimensions.get('screen');
 const Carousel = ({item}: Props): JSX.Element => {
   return (
     <View style={styles.container}>
-      <Image resizeMode="stretch" style={styles.image} source={item.image} />
+      <Image style={styles.image} source={item.image} />
     </View>
   );
 };
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   image: {
-    width: width - 48,
+    width: width - 50,
     borderRadius: 16,
   },
 });

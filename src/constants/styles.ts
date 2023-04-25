@@ -19,11 +19,24 @@ export default {
     fontFamily: MusticaPro,
     fontSize: 18,
     color: white,
+    letterSpacing: 0.4,
   },
   smallText: {
     fontFamily: MusticaPro,
     color: black,
     fontSize: 12,
+  },
+  text: {
+    fontFamily: MusticaPro,
+    color: black,
+    fontSize: 14,
+    letterSpacing: 0.4,
+  },
+  largeText: {
+    fontFamily: MusticaPro,
+    color: black,
+    fontSize: 18,
+    letterSpacing: 0.4,
   },
   shadowProps: {
     shadowColor: '#262626',

@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlatList, View} from 'react-native';
 import CarouselItem from './CarouselItem';
-import {GSTYLES, IMGS} from '../../constants';
+import {IMGS} from '../../constants';
 import Pagination from './Paginations';
 
 const images = [
@@ -26,7 +26,6 @@ const Carousel = (): JSX.Element => {
   return (
     <View>
       <FlatList
-        style={GSTYLES.shadowProps}
         data={images}
         renderItem={({item}) => <CarouselItem item={item} />}
         horizontal

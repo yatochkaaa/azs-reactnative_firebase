@@ -43,7 +43,7 @@ const DrawerNavigator = (): JSX.Element => {
         headerShown: false,
         drawerPosition: 'right',
         drawerActiveTintColor: GSTYLES.colors.emerald,
-        drawerLabelStyle: styles.menuText,
+        drawerLabelStyle: GSTYLES.menuText,
         drawerStyle: styles.drawer,
       }}>
       <Drawer.Screen
@@ -100,11 +100,6 @@ const styles = StyleSheet.create({
     paddingTop: 100,
     paddingLeft: 12,
     backgroundColor: GSTYLES.colors.emerald,
-  },
-  menuText: {
-    fontFamily: GSTYLES.fontFamily.MusticaPro,
-    fontSize: 18,
-    color: GSTYLES.colors.white,
   },
 });
 
