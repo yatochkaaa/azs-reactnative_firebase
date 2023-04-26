@@ -11,6 +11,11 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 const CustomDrawerContent = (
   props: DrawerContentComponentProps,
 ): JSX.Element => {
+  const logOut = () => {
+    props.navigation.closeDrawer();
+    props.navigation.navigate(ROUTES.REGISTRATION);
+  };
+
   const logoutButton = () => {
     return (
       <View style={styles.logoutButton}>
@@ -23,10 +28,7 @@ const CustomDrawerContent = (
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
-      <DrawerItem
-        label={logoutButton}
-        onPress={() => props.navigation.navigate(ROUTES.REGISTRATION)}
-      />
+      <DrawerItem label={logoutButton} onPress={logOut} />
     </DrawerContentScrollView>
   );
 };

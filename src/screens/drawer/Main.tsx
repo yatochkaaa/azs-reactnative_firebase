@@ -16,8 +16,6 @@ import GoogleMap from '../../components/GoogleMap';
 type Props = DrawerScreenProps<DrawerParamList, ROUTES.MAIN_DRAWER>;
 
 const Main = ({navigation}: Props): JSX.Element => {
-  const openDrawer = () => navigation.openDrawer();
-
   return (
     <ImageBackground style={styles.background} source={IMGS.bg}>
       <View style={styles.container}>
@@ -27,7 +25,7 @@ const Main = ({navigation}: Props): JSX.Element => {
             <Image source={ICONS.notificationIcon} />
           </TouchableOpacity>
           <Image source={IMGS.mainLogo} />
-          <TouchableOpacity onPress={openDrawer}>
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Image source={ICONS.menuIcon} />
           </TouchableOpacity>
         </View>

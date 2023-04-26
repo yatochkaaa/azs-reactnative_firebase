@@ -1,30 +1,16 @@
 import React from 'react';
-import {
-  View,
-  ImageBackground,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import {ImageBackground, StyleSheet} from 'react-native';
 import {DrawerScreenProps} from '@react-navigation/drawer';
 import {IMGS, ROUTES} from '../../constants';
 import {DrawerParamList} from '../../navigations/DrawerNavigator';
+import DrawerHeader from '../../components/DrawerHeader';
 
 type Props = DrawerScreenProps<DrawerParamList, ROUTES.DISCOUNTS_DRAWER>;
 
 const Discounts = ({route, navigation}: Props): JSX.Element => {
   return (
     <ImageBackground style={styles.background} source={IMGS.bg}>
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate(ROUTES.MAIN_DRAWER)}>
-          <Image source={IMGS.arrow} />
-        </TouchableOpacity>
-        <View style={styles.content}>
-          <Text>{route.name}</Text>
-        </View>
-      </View>
+      <DrawerHeader route={route} navigation={navigation} />
     </ImageBackground>
   );
 };
@@ -32,13 +18,6 @@ const Discounts = ({route, navigation}: Props): JSX.Element => {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-  },
-  container: {
-    padding: 24,
-  },
-  content: {
-    padding: 24,
-    alignItems: 'center',
   },
 });
 

@@ -11,9 +11,9 @@ import {
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {GSTYLES, IMGS, ROUTES} from '../../constants';
 import PhoneNumberInput from '../../components/PhoneNumberInput';
-import {AuthStackParamList} from '../../navigations/RootNavigator';
+import {RootStackParamList} from '../../navigations/RootNavigator';
 
-type Props = NativeStackScreenProps<AuthStackParamList, ROUTES.REGISTRATION>;
+type Props = NativeStackScreenProps<RootStackParamList, ROUTES.REGISTRATION>;
 
 const Registration = ({navigation}: Props): JSX.Element => {
   const [phoneInputText, setPhoneInputText] = React.useState<string>('');

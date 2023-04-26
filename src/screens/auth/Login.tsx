@@ -1,10 +1,10 @@
 import React from 'react';
 import {Text, View, SafeAreaView, StyleSheet} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {AuthStackParamList} from '../../navigations/RootNavigator';
+import {RootStackParamList} from '../../navigations/RootNavigator';
 import {ROUTES} from '../../constants';
 
-type Props = NativeStackScreenProps<AuthStackParamList, ROUTES.LOGIN>;
+type Props = NativeStackScreenProps<RootStackParamList, ROUTES.LOGIN>;
 
 const Login = ({}: Props): JSX.Element => {
   return (
