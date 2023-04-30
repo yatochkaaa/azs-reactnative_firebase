@@ -1,6 +1,8 @@
 export enum ROUTES {
   LOGIN = 'Login',
-  REGISTRATION = 'Registration',
+  REGISTRATION_PHONE = 'Registration Phone',
+  REGISTRATION_NAME = 'Registration Name',
+  REGISTRATION_BIRTHDAY = 'Registration Birthday',
   DRAWER = 'Drawer',
 
   MAIN_DRAWER = 'Головна',
@@ -10,4 +12,7 @@ export enum ROUTES {
   PRICES_DRAWER = 'Ціни',
   DISCOUNTS_DRAWER = 'Акції',
   MAP_DRAWER = 'Карта АЗК',
+
+  REDIRECT_PROFILE = 'власного кабінету',
+  REDIRECT_COUPONS = 'талонів',
 }

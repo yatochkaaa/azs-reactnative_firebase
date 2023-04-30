@@ -24,6 +24,7 @@ export type DrawerParamList = {
   [ROUTES.PRICES_DRAWER]: undefined;
   [ROUTES.DISCOUNTS_DRAWER]: undefined;
   [ROUTES.MAP_DRAWER]: undefined;
+  [ROUTES.REGISTRATION_PHONE]: undefined;
 };
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -97,7 +98,7 @@ const DrawerNavigator = (): JSX.Element => {
 
 const styles = StyleSheet.create({
   drawer: {
-    paddingTop: 100,
+    paddingTop: 148,
     paddingLeft: 12,
     backgroundColor: GSTYLES.colors.emerald,
   },

@@ -6,11 +6,12 @@ import {
   TouchableOpacity,
   Image,
   Text,
+  Pressable,
 } from 'react-native';
 import {DrawerScreenProps} from '@react-navigation/drawer';
 import {GSTYLES, ICONS, IMGS, ROUTES} from '../../constants';
 import {DrawerParamList} from '../../navigations/DrawerNavigator';
-import Carousel from '../../components/Carousel/Carousel';
+import Carousel from '../../components/carousel/Carousel';
 import GoogleMap from '../../components/GoogleMap';
 
 type Props = DrawerScreenProps<DrawerParamList, ROUTES.MAIN_DRAWER>;
@@ -36,12 +37,15 @@ const Main = ({navigation}: Props): JSX.Element => {
           <Text style={[GSTYLES.text, styles.sectionTitle]}>
             Слідкуй за знижками
           </Text>
-          <TouchableOpacity style={[GSTYLES.shadowProps, styles.sectionButton]}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(ROUTES.DISCOUNTS_DRAWER)}
+            style={[GSTYLES.shadowProps, styles.sectionButton]}>
             <Image style={styles.sectionIcon} source={ICONS.discountIcon} />
             <Text style={GSTYLES.text}>Отримати персональну знижку</Text>
           </TouchableOpacity>
           <View style={styles.split}>
             <TouchableOpacity
+              onPress={() => navigation.navigate(ROUTES.СOUPONS_DRAWER)}
               style={[
                 GSTYLES.shadowProps,
                 styles.sectionButton,
@@ -51,6 +55,7 @@ const Main = ({navigation}: Props): JSX.Element => {
               <Text style={GSTYLES.text}>Придбати{'\n'}пальне</Text>
             </TouchableOpacity>
             <TouchableOpacity
+              onPress={() => navigation.navigate(ROUTES.PRICES_DRAWER)}
               style={[
                 GSTYLES.shadowProps,
                 styles.sectionButton,
@@ -66,7 +71,9 @@ const Main = ({navigation}: Props): JSX.Element => {
           <Text style={[GSTYLES.text, styles.sectionTitle]}>
             Паливна картка
           </Text>
-          <TouchableOpacity style={[GSTYLES.shadowProps, styles.sectionButton]}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(ROUTES.PROFILE_DRAWER)}
+            style={[GSTYLES.shadowProps, styles.sectionButton]}>
             <Image style={styles.sectionIcon} source={ICONS.cardIcon} />
             <Text style={GSTYLES.largeText}>1205.80 грн</Text>
             <Image style={styles.barcode} source={IMGS.barcode} />
@@ -75,9 +82,11 @@ const Main = ({navigation}: Props): JSX.Element => {
 
         <View>
           <Text style={[GSTYLES.text, styles.sectionTitle]}>Карта АЗК САН</Text>
-          <View style={styles.googleMapContainer}>
+          <Pressable
+            onPress={() => navigation.navigate(ROUTES.MAP_DRAWER)}
+            style={styles.googleMapContainer}>
             <GoogleMap />
-          </View>
+          </Pressable>
         </View>
       </View>
     </ImageBackground>

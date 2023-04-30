@@ -9,36 +9,40 @@ import {
 } from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 import {GSTYLES, IMGS, ROUTES} from '../../constants';
 import {RootStackParamList} from '../../navigations/RootNavigator';
 import PhoneNumberInput from '../../components/auth/PhoneInputGroup';
 import OTPInput from '../../components/auth/OTPInputGroup';
-import {useAppDispatch} from '../../store/hooks';
 import AuthHeader from '../../components/auth/AuthHeader';
+import {useAppDispatch} from '../../store/hooks';
 import {setUserIdAction} from '../../store/action-creators/user';
 
-type Props = NativeStackScreenProps<RootStackParamList, ROUTES.LOGIN>;
+type Props = NativeStackScreenProps<
+  RootStackParamList,
+  ROUTES.REGISTRATION_PHONE
+>;
 
-const Login = ({navigation}: Props): JSX.Element => {
+const RegistrationPhone = ({navigation}: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const [phone, setPhone] = React.useState<string>('');
   const [code, setCode] = React.useState<string>('');
   const [confirm, setConfirm] =
     React.useState<FirebaseAuthTypes.ConfirmationResult | null>(null);
 
-  const signIn = async (phoneNumber: string) => {
+  const sentConfirmation = async (phoneNumber: string) => {
     try {
       const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
       setConfirm(confirmation);
     } catch (error: any) {
-      Alert.alert('Invalid signIn');
+      Alert.alert(error);
     }
   };
 
-  const confirmVerificationCode = async (verificationCode: string) => {
+  const confirmVerificationCode = (verificationCode: string) => {
     try {
       if (confirm) {
-        await confirm.confirm(verificationCode);
+        confirm.confirm(verificationCode);
         setConfirm(null);
       }
     } catch (error) {
@@ -48,13 +52,16 @@ const Login = ({navigation}: Props): JSX.Element => {
 
   const nextAction = () => {
     if (!confirm) {
-      signIn(phone);
+      sentConfirmation(phone);
     } else {
       confirmVerificationCode(code);
       auth().onAuthStateChanged(user => {
         if (user) {
           dispatch(setUserIdAction(user.uid));
-          navigation.navigate(ROUTES.DRAWER);
+          firestore().collection('users').doc(user.uid).set({
+            phone,
+          });
+          navigation.navigate(ROUTES.REGISTRATION_NAME);
         }
       });
     }
@@ -66,7 +73,7 @@ const Login = ({navigation}: Props): JSX.Element => {
         <View style={styles.headerContainer}>
           <AuthHeader
             toMain={() => navigation.navigate(ROUTES.DRAWER)}
-            title={'Авторизація'}
+            title={'Процес реєстраціЇ'}
           />
         </View>
         <View style={styles.main}>
@@ -84,7 +91,7 @@ const Login = ({navigation}: Props): JSX.Element => {
 
           <TouchableOpacity onPress={nextAction} style={GSTYLES.button}>
             <Text style={[GSTYLES.buttonLargeText, styles.buttonText]}>
-              Увійти
+              Далі
             </Text>
           </TouchableOpacity>
         </View>
@@ -121,4 +128,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default RegistrationPhone;

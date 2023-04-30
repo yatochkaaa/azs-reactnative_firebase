@@ -1,5 +1,6 @@
 export {default as Login} from './auth/Login';
-export {default as Registration} from './auth/Registration';
+export {default as RegistrationPhone} from './auth/RegistrationPhone';
+export {default as RegistrationName} from './auth/RegistrationName';
 export {default as Main} from './drawer/Main';
 export {default as Coupons} from './drawer/Coupons';
 export {default as Prices} from './drawer/Prices';

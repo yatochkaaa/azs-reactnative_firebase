@@ -48,4 +48,21 @@ export default {
     shadowRadius: 10,
     elevation: 2,
   },
+  button: {
+    width: '100%',
+    backgroundColor: emerald,
+    padding: 16,
+    borderRadius: 15,
+  },
+  buttonText: {
+    fontFamily: MusticaPro,
+    fontSize: 18,
+    color: white,
+    letterSpacing: 0.4,
+  },
+  buttonLargeText: {
+    fontFamily: Intro,
+    fontSize: 16,
+    color: white,
+  },
 };
