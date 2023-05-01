@@ -16,7 +16,7 @@ interface Props {
 }
 
 const {width} = Dimensions.get('screen');
-const pinCount = 4;
+const pinCount = 6;
 
 const OTPInput = ({code, setCode, editable}: Props) => {
   return (
