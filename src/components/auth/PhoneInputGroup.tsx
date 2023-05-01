@@ -47,9 +47,13 @@ const PhoneNumberInput: React.FC<Props> = ({phone, setPhone}) => {
           keyboardType="number-pad"
           autoFocus
         />
-        {phone.length > 5 && (
+        {phone.length > 5 ? (
           <Pressable style={styles.actionIcon} onPress={clearInput}>
             <Image source={IMGS.cross} />
+          </Pressable>
+        ) : (
+          <Pressable style={styles.actionIcon} onPress={inputLabel}>
+            <Image source={IMGS.edit} />
           </Pressable>
         )}
       </View>

@@ -26,37 +26,39 @@ const Login = ({navigation}: Props): JSX.Element => {
   const [confirm, setConfirm] =
     React.useState<FirebaseAuthTypes.ConfirmationResult | null>(null);
 
-  const signIn = async (phoneNumber: string) => {
+  const sendConfirmation = async () => {
     try {
-      const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+      const confirmation = await auth().signInWithPhoneNumber(phone);
       setConfirm(confirmation);
-    } catch (error: any) {
-      Alert.alert('Invalid signIn');
+    } catch (e) {
+      Alert.alert('Невірно вказано номер телефону');
     }
   };
 
-  const confirmVerificationCode = async (verificationCode: string) => {
+  const confirmCode = async (verificationCode: string) => {
     try {
       if (confirm) {
         await confirm.confirm(verificationCode);
         setConfirm(null);
-      }
-    } catch (error) {
-      Alert.alert('Invalid code');
-    }
-  };
 
-  const nextAction = () => {
-    if (!confirm) {
-      signIn(phone);
-    } else {
-      confirmVerificationCode(code);
-      auth().onAuthStateChanged(user => {
+        const user = auth().currentUser;
         if (user) {
+          console.log(user.uid);
+
           dispatch(setUserIdAction(user.uid));
           navigation.navigate(ROUTES.DRAWER);
         }
-      });
+      }
+    } catch (error) {
+      Alert.alert('Невірно вказано код');
+    }
+  };
+
+  const signInAndNavMain = () => {
+    if (!confirm) {
+      sendConfirmation();
+    } else {
+      confirmCode(code);
     }
   };
 
@@ -82,7 +84,7 @@ const Login = ({navigation}: Props): JSX.Element => {
             />
           </View>
 
-          <TouchableOpacity onPress={nextAction} style={GSTYLES.button}>
+          <TouchableOpacity onPress={signInAndNavMain} style={GSTYLES.button}>
             <Text style={[GSTYLES.buttonLargeText, styles.buttonText]}>
               Увійти
             </Text>

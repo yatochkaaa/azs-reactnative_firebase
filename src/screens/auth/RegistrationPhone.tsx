@@ -30,32 +30,24 @@ const RegistrationPhone = ({navigation}: Props): JSX.Element => {
   const [confirm, setConfirm] =
     React.useState<FirebaseAuthTypes.ConfirmationResult | null>(null);
 
-  const sentConfirmation = async (phoneNumber: string) => {
+  const sendConfirmation = async () => {
     try {
-      const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+      const confirmation = await auth().signInWithPhoneNumber(phone);
       setConfirm(confirmation);
-    } catch (error: any) {
-      Alert.alert(error);
+      console.log(confirmation);
+    } catch (e) {
+      console.log('e', e);
+      Alert.alert('Невірно вказано номер телефону');
     }
   };
 
-  const confirmVerificationCode = (verificationCode: string) => {
+  const confirmCode = async (verificationCode: string) => {
     try {
       if (confirm) {
-        confirm.confirm(verificationCode);
+        await confirm.confirm(verificationCode);
         setConfirm(null);
-      }
-    } catch (error) {
-      Alert.alert('Invalid code');
-    }
-  };
 
-  const nextAction = () => {
-    if (!confirm) {
-      sentConfirmation(phone);
-    } else {
-      confirmVerificationCode(code);
-      auth().onAuthStateChanged(user => {
+        const user = auth().currentUser;
         if (user) {
           dispatch(setUserIdAction(user.uid));
           firestore().collection('users').doc(user.uid).set({
@@ -63,7 +55,27 @@ const RegistrationPhone = ({navigation}: Props): JSX.Element => {
           });
           navigation.navigate(ROUTES.REGISTRATION_NAME);
         }
-      });
+
+        // auth().onAuthStateChanged(user => {
+        //   if (user) {
+        //     dispatch(setUserIdAction(user.uid));
+        //     firestore().collection('users').doc(user.uid).set({
+        //       phone,
+        //     });
+        //     navigation.navigate(ROUTES.REGISTRATION_NAME);
+        //   }
+        // });
+      }
+    } catch (error) {
+      Alert.alert('Невірно вказано код');
+    }
+  };
+
+  const saveAndNavNext = () => {
+    if (!confirm) {
+      sendConfirmation();
+    } else {
+      confirmCode(code);
     }
   };
 
@@ -89,7 +101,7 @@ const RegistrationPhone = ({navigation}: Props): JSX.Element => {
             />
           </View>
 
-          <TouchableOpacity onPress={nextAction} style={GSTYLES.button}>
+          <TouchableOpacity onPress={saveAndNavNext} style={GSTYLES.button}>
             <Text style={[GSTYLES.buttonLargeText, styles.buttonText]}>
               Далі
             </Text>

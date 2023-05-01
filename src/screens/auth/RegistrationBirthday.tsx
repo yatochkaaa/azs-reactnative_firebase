@@ -6,14 +6,12 @@ import {
   ImageBackground,
   TouchableOpacity,
   TextInput,
-  Pressable,
+  Dimensions,
 } from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import DateTimePicker, {
-  DateTimePickerEvent,
-} from '@react-native-community/datetimepicker';
 import CheckBox from '@react-native-community/checkbox';
 import firestore from '@react-native-firebase/firestore';
+import DatePicker from 'react-native-date-picker';
 import {GSTYLES, IMGS, ROUTES} from '../../constants';
 import {RootStackParamList} from '../../navigations/RootNavigator';
 import AuthHeader from '../../components/auth/AuthHeader';
@@ -24,14 +22,15 @@ type Props = NativeStackScreenProps<
   ROUTES.REGISTRATION_BIRTHDAY
 >;
 
+const {width} = Dimensions.get('screen');
+
 const RegistrationBirthday = ({navigation}: Props): JSX.Element => {
   const {userId} = useAppSelector(state => state.userReducer);
   const [toggleCheckBox, setToggleCheckBox] = React.useState<boolean>(false);
   const [dateOfBirth, setDateOfBirth] = React.useState<string>('');
-  const [date, setDate] = React.useState<Date>(new Date());
-  const [showPicker, setShowPicker] = React.useState<boolean>(false);
+  const [date, setDate] = React.useState<Date>(new Date('2000-01-01'));
 
-  const nextAction = () => {
+  const saveAndNavMain = () => {
     if (userId) {
       firestore().collection('users').doc(userId).update({
         birthday: dateOfBirth,
@@ -40,35 +39,19 @@ const RegistrationBirthday = ({navigation}: Props): JSX.Element => {
     }
   };
 
-  const toggleDatePicker = () => {
-    setShowPicker(!showPicker);
-  };
-
-  const onChangeDate = (
-    {type}: DateTimePickerEvent,
-    selectedDate: Date | undefined,
-  ) => {
-    if (type === 'set') {
-      const currentDate = selectedDate;
-
-      if (currentDate) {
-        setDate(currentDate);
-        toggleDatePicker();
-        setDateOfBirth(formatDate(currentDate));
-      }
-    } else {
-      toggleDatePicker();
-    }
+  const onDateChange = (selectedDate: Date) => {
+    setDateOfBirth(formatDate(selectedDate));
+    setDate(selectedDate);
   };
 
   const formatDate = (rawDate: Date) => {
     let dateData = new Date(rawDate);
     let year = dateData.getFullYear();
-    let month = dateData.getMonth() + 1;
-    let day = dateData.getDate();
+    let month = (dateData.getMonth() + 1).toString();
+    let day = dateData.getDate().toString();
 
-    month = month < 10 ? Number(`0${month}`) : month;
-    day = day < 10 ? Number(`0${day}`) : day;
+    month = Number(month) < 10 ? `0${month}` : month;
+    day = Number(day) < 10 ? `0${day}` : day;
 
     return `${day}.${month}.${year}`;
   };
@@ -80,8 +63,6 @@ const RegistrationBirthday = ({navigation}: Props): JSX.Element => {
 
     return false;
   };
-
-  console.log(userId);
 
   return (
     <ImageBackground style={styles.background} source={IMGS.bg}>
@@ -97,14 +78,12 @@ const RegistrationBirthday = ({navigation}: Props): JSX.Element => {
             <Text style={[GSTYLES.smallText, styles.inputTitle]}>
               Дата народження
             </Text>
-            <Pressable onPress={toggleDatePicker}>
-              <TextInput
-                style={[GSTYLES.shadowProps, GSTYLES.text, styles.input]}
-                value={dateOfBirth}
-                onChangeText={setDateOfBirth}
-                editable={false}
-              />
-            </Pressable>
+            <TextInput
+              style={[GSTYLES.shadowProps, GSTYLES.text, styles.input]}
+              value={dateOfBirth}
+              onChangeText={setDateOfBirth}
+              editable={false}
+            />
             <View style={styles.acceptRulesContainer}>
               <View>
                 <Text style={[GSTYLES.smallText]}>
@@ -124,7 +103,7 @@ const RegistrationBirthday = ({navigation}: Props): JSX.Element => {
           </View>
           <TouchableOpacity
             disabled={!isFieldsFilled}
-            onPress={nextAction}
+            onPress={saveAndNavMain}
             style={[
               GSTYLES.button,
               // eslint-disable-next-line react-native/no-inline-styles
@@ -134,21 +113,20 @@ const RegistrationBirthday = ({navigation}: Props): JSX.Element => {
               Далі
             </Text>
           </TouchableOpacity>
-
-          {showPicker && (
-            <View style={styles.datePicker}>
-              <DateTimePicker
-                value={date}
-                display="spinner"
-                mode={'date'}
-                onChange={onChangeDate}
-                maximumDate={new Date()}
-                minimumDate={new Date('1900-1-1')}
-              />
-            </View>
-          )}
         </View>
       </View>
+      <DatePicker
+        style={styles.datePicker}
+        date={date}
+        onDateChange={onDateChange}
+        mode={'date'}
+        maximumDate={new Date()}
+        minimumDate={new Date('1900-1-1')}
+        androidVariant="iosClone"
+        locale="ukr"
+        textColor={GSTYLES.colors.black}
+        fadeToColor={GSTYLES.colors.lightgray}
+      />
     </ImageBackground>
   );
 };
@@ -202,9 +180,9 @@ const styles = StyleSheet.create({
   },
   datePicker: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
+    height: 250,
+    bottom: 0,
+    width,
   },
 });
 

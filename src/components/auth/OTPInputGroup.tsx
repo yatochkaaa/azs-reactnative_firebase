@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {MaskedTextInput, mask as codeMask} from 'react-native-mask-text';
 import {GSTYLES} from '../../constants';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 interface Props {
   code: string;
@@ -28,9 +29,9 @@ const OTPInput = ({code, setCode, editable}: Props) => {
         editable={editable}
       />
 
-      <Text style={[GSTYLES.smallText, styles.resentText]}>
-        Надіслати код повторно
-      </Text>
+      <TouchableOpacity style={styles.resentButton}>
+        <Text style={GSTYLES.smallText}>Надіслати код повторно</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -49,8 +50,8 @@ const styles = StyleSheet.create({
   inputTitle: {
     marginBottom: 12,
   },
-  resentText: {
-    textAlign: 'center',
+  resentButton: {
+    alignItems: 'center',
   },
 });
 

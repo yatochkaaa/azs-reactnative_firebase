@@ -6,6 +6,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import firestore from '@react-native-firebase/firestore';
@@ -24,7 +25,15 @@ const RegistrationName = ({navigation}: Props): JSX.Element => {
   const [name, setName] = React.useState<string>('');
   const [surname, setSurname] = React.useState<string>('');
 
-  const nextAction = () => {
+  const isFieldsFilled = () => {
+    if (name.length > 2 && surname.length > 2) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const saveAndNavNext = () => {
     try {
       if (userId) {
         firestore().collection('users').doc(userId).update({
@@ -34,11 +43,9 @@ const RegistrationName = ({navigation}: Props): JSX.Element => {
         navigation.navigate(ROUTES.REGISTRATION_BIRTHDAY);
       }
     } catch (e) {
-      console.log('Invalid name or surname');
+      Alert.alert('Invalid name or surname');
     }
   };
-
-  console.log(userId);
 
   return (
     <ImageBackground style={styles.background} source={IMGS.bg}>
@@ -59,6 +66,7 @@ const RegistrationName = ({navigation}: Props): JSX.Element => {
               value={name}
               onChangeText={setName}
               autoFocus
+              maxLength={16}
             />
           </View>
           <View style={styles.inputGroup}>
@@ -69,9 +77,17 @@ const RegistrationName = ({navigation}: Props): JSX.Element => {
               style={[GSTYLES.shadowProps, GSTYLES.text, styles.input]}
               value={surname}
               onChangeText={setSurname}
+              maxLength={16}
             />
           </View>
-          <TouchableOpacity onPress={nextAction} style={GSTYLES.button}>
+          <TouchableOpacity
+            disabled={!isFieldsFilled()}
+            style={[
+              GSTYLES.button,
+              // eslint-disable-next-line react-native/no-inline-styles
+              {opacity: isFieldsFilled() ? 1 : 0.5},
+            ]}
+            onPress={saveAndNavNext}>
             <Text style={[GSTYLES.buttonLargeText, styles.buttonText]}>
               Далі
             </Text>
