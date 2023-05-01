@@ -43,8 +43,6 @@ const Login = ({navigation}: Props): JSX.Element => {
 
         const user = auth().currentUser;
         if (user) {
-          console.log(user.uid);
-
           dispatch(setUserIdAction(user.uid));
           navigation.navigate(ROUTES.DRAWER);
         }

@@ -34,9 +34,7 @@ const RegistrationPhone = ({navigation}: Props): JSX.Element => {
     try {
       const confirmation = await auth().signInWithPhoneNumber(phone);
       setConfirm(confirmation);
-      console.log(confirmation);
     } catch (e) {
-      console.log('e', e);
       Alert.alert('Невірно вказано номер телефону');
     }
   };
