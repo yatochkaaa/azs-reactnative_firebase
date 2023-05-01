@@ -1,8 +1,13 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {MaskedTextInput, mask as codeMask} from 'react-native-mask-text';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
+import OTPInputView from '@twotalltotems/react-native-otp-input';
 import {GSTYLES} from '../../constants';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 
 interface Props {
   code: string;
@@ -10,9 +15,10 @@ interface Props {
   editable: boolean;
 }
 
-const OTPInput = ({code, setCode, editable}: Props) => {
-  const mask = '999999';
+const {width} = Dimensions.get('screen');
+const pinCount = 4;
 
+const OTPInput = ({code, setCode, editable}: Props) => {
   return (
     // eslint-disable-next-line react-native/no-inline-styles
     <View style={{opacity: editable ? 1 : 0}}>
@@ -20,13 +26,14 @@ const OTPInput = ({code, setCode, editable}: Props) => {
         Введіть код з SMS
       </Text>
 
-      <MaskedTextInput
-        value={code && codeMask(code, mask, 'custom')}
-        onChangeText={setCode}
-        style={[GSTYLES.shadowProps, GSTYLES.text, styles.input]}
-        mask={mask}
-        keyboardType="number-pad"
+      <OTPInputView
+        style={styles.otpInput}
+        codeInputFieldStyle={styles.underlineStyleBase}
+        code={code}
+        onCodeChanged={setCode}
+        pinCount={pinCount}
         editable={editable}
+        keyboardType="number-pad"
       />
 
       <TouchableOpacity style={styles.resentButton}>
@@ -37,15 +44,21 @@ const OTPInput = ({code, setCode, editable}: Props) => {
 };
 
 const styles = StyleSheet.create({
-  input: {
-    backgroundColor: GSTYLES.colors.white,
-    padding: 12,
+  otpInput: {
+    height: 44,
+    width: '100%',
     marginBottom: 28,
-    textAlign: 'center',
+  },
+  underlineStyleBase: {
+    ...GSTYLES.shadowProps,
+    ...GSTYLES.text,
+    height: 44,
+    width: (width - 64 - 36) / pinCount, // (screenWidth - containerPaddings - gap) / pinCount
     borderRadius: 15,
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: GSTYLES.colors.white,
+    backgroundColor: GSTYLES.colors.white,
   },
   inputTitle: {
     marginBottom: 12,

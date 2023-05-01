@@ -55,16 +55,6 @@ const RegistrationPhone = ({navigation}: Props): JSX.Element => {
           });
           navigation.navigate(ROUTES.REGISTRATION_NAME);
         }
-
-        // auth().onAuthStateChanged(user => {
-        //   if (user) {
-        //     dispatch(setUserIdAction(user.uid));
-        //     firestore().collection('users').doc(user.uid).set({
-        //       phone,
-        //     });
-        //     navigation.navigate(ROUTES.REGISTRATION_NAME);
-        //   }
-        // });
       }
     } catch (error) {
       Alert.alert('Невірно вказано код');

@@ -1,4 +1,5 @@
 const black = '#303030';
+const shadowColor = '#262626';
 const white = '#fff';
 const emerald = '#00b488';
 const MusticaPro = 'MusticaPro-SemiBold';
@@ -39,7 +40,7 @@ export default {
     letterSpacing: 0.4,
   },
   shadowProps: {
-    shadowColor: '#262626',
+    shadowColor: shadowColor,
     shadowOffset: {
       width: 0,
       height: 4,
@@ -47,6 +48,12 @@ export default {
     shadowOpacity: 0.07,
     shadowRadius: 10,
     elevation: 2,
+  },
+  border: {
+    borderRadius: 15,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: white,
   },
   button: {
     width: '100%',
